@@ -1,0 +1,58 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  font-size: 15px;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.properties {
+  align-items: center;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  background-color: rgb(212, 237, 241);
+  width: 180px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.proptext {
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: font-size 0.4s;
+}
+.proptext:hover {
+  font-size: 17px;
+}
+.hidden {
+  visibility: hidden;
+  position: absolute;
+}
+.title {
+  text-align: center;
+}
+summary {
+  border-radius: 10px;
+  width: 90px;
+  cursor: pointer;
+  transition: font-size 0.2s ease-in-out;
+}
+summary:hover {
+  font-size: 18px;
+}
+
+.randomize {
+  border-radius: 10px;
+  width: 140px;
+  cursor: pointer;
+  transition: font-size 0.2s ease-in-out;
+}
+.randomize:hover {
+  font-size: 18px;
+}
+
+.unselectable {
+  user-select: none;
+}

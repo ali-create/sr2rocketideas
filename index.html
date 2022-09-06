@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random rocket idea</title>
+  </head>
+  <body>
+    <div class="app" >
+    <div class="title"><h2>Rocket Generator</h1></div>
+      <h4>Click on properties to randomize</h4>
+    <div class="properties">
+      <div class="height proptext unselectable">0</div>
+      <div class="centertankwidth proptext unselectable">0</div>
+      <div class="boosters proptext unselectable">0</div>
+      <div class="payload proptext unselectable">0</div>
+      <div class="target proptext unselectable">0</div>
+      <div class="stages proptext unselectable">0</div>
+      <div class="lowerengines proptext unselectable">0</div>
+      <div class="upperengines proptext unselectable">0</div>
+      <div class="middleengines proptext unselectable">0</div>
+      <br />
+      <details>
+        <summary class="controls">Controls</summary>
+        <div class="controls">
+          <input type="checkbox" class="heightbtn btn" checked="true" />
+          <span>Height</span><br />
+          <input
+            type="checkbox"
+            class="centertankwidthbtn btn"
+            checked="true"
+          />
+          <span>Center Tank Width</span><br />
+          <input type="checkbox" class="boostersbtn btn" checked="true" />
+          <span>Boosters</span><br />
+          <input type="checkbox" class="payloadbtn btn" />
+          <span>Payload</span><br />
+          <input type="checkbox" class="targetbtn btn" checked="true" />
+          <span>Target</span><br />
+          <input type="checkbox" class="stagesbtn btn" />
+          <span>Stages</span><br />
+          <input type="checkbox" class="lowerenginesbtn btn" />
+          <span>Lower Engines</span><br />
+          <input type="checkbox" class="upperenginesbtn btn" />
+          <span>Upper Engines</span><br />
+          <input type="checkbox" class="middleenginesbtn btn" />
+          <span>Middle Engines</span><br />
+        </div>
+      </details>
+      <br />
+      <button class="randomize">Randomize all</button>
+    </div>
+  </div>
+
+    <script type="module" src="javascript/main.js"></script>
+    <script type="module" src="javascript/elements.js"></script>
+    <script type="module" src="javascript/rocketProperties.js"></script>
+  </body>
+</html>
