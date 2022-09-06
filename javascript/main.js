@@ -1,11 +1,13 @@
 "use strict";
 import { htmlElements } from "./elements.js";
-import { properties, propertiesGeneral } from "./rocketProperties.js";
-import { functions } from "./functions.js";
+import { properties, propertiesGeneral, presets } from "./rocketProperties.js";
 
 console.log("oh hey there");
 console.log(
   "also this aint optimized \nso expect a stroke when \ngoing through this"
+);
+console.log(
+  "also while youre here feel free to add chances to each properties\nthe chances are the values and the output are the keys\ncheck the rocketProperties.js for that"
 );
 
 let currentKey;
@@ -20,6 +22,29 @@ let enabledOptions = {
   middleengines: false,
   lowerengines: false,
   upperengines: false,
+};
+
+let currentPreset;
+let curPresetValArr;
+let curPresetKeyArr;
+
+// loading presets
+const loadPreset = function (name) {
+  currentPreset = presets[name];
+  curPresetValArr = [];
+  curPresetKeyArr = [];
+  Object.keys(currentPreset).forEach(function (element) {
+    curPresetKeyArr.push(element);
+  });
+  Object.values(currentPreset).forEach(function (element) {
+    curPresetValArr.push(element);
+  });
+  curPresetValArr.forEach(function (element, idx) {
+    if (element != "") {
+      properties[curPresetKeyArr[idx]] = curPresetValArr[idx];
+    }
+  });
+  updateText();
 };
 
 const randomValue = function (min, max) {
@@ -42,17 +67,20 @@ const updateText = function () {
     properties.lowerengines + " Lower Engines";
 };
 
+let picked;
+let chance;
+let endValue;
+
 const generateProperties = function () {
   for (let i = 0; i < Object.keys(properties).length; i++) {
     currentKey = Object.keys(properties)[i];
+    picked = Object.keys(propertiesGeneral[currentKey]);
 
-    // choose random value from array
-    chosenValue =
-      propertiesGeneral[currentKey][
-        Math.trunc(randomValue(0, [propertiesGeneral[currentKey].length] - 1))
-      ];
+    chance = propertiesGeneral[currentKey][picked[0]];
 
-    properties[currentKey] = chosenValue;
+    endValue = picked[Math.trunc(randomValue(0, picked.length - 1))];
+
+    properties[currentKey] = endValue;
   }
   updateText();
 };
@@ -122,18 +150,22 @@ htmlElements.randomize.addEventListener("click", function () {
   generateProperties();
 });
 
+let picked2;
 let chosenValue2;
 
 htmlElements.proptext.forEach((element) => {
   element.addEventListener("click", function (e) {
-    chosenValue2 =
-      propertiesGeneral[element.classList[0]][
-        Math.trunc(
-          randomValue(0, [propertiesGeneral[element.classList[0]].length] - 1)
-        )
-      ];
+    picked2 = Object.keys(propertiesGeneral[element.classList[0]]);
 
-    properties[element.classList[0]] = chosenValue2;
+    properties[element.classList[0]] =
+      picked2[Math.trunc(randomValue(0, picked2.length - 1))];
+
     updateText();
+  });
+});
+
+htmlElements.preset.forEach(function (element) {
+  element.addEventListener("click", function () {
+    loadPreset(element.getAttribute("preset"));
   });
 });
