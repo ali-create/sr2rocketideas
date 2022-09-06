@@ -27,6 +27,7 @@ const elementsToProcess = {
   lowerenginesbtn: GE(".lowerenginesbtn"),
   randomize: GE(".randomize"),
   proptext: GEA(".proptext"),
+  preset: GEA(".preset"),
 };
 
 htmlElements = elementsToProcess;
