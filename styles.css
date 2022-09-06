@@ -56,3 +56,31 @@ summary:hover {
 .unselectable {
   user-select: none;
 }
+
+.presets {
+  justify-content: center;
+  width: 450px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  row-gap: 15px;
+  background-color: rgb(152, 198, 206);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.preset {
+  background-color: rgb(255, 255, 255);
+  padding: 9px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.preset:hover {
+  background-color: rgb(207, 228, 227);
+}
+.presettitle {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
