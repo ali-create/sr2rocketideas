@@ -1,171 +1,299 @@
 "use strict";
-import { htmlElements } from "./elements.js";
-import { properties, propertiesGeneral, presets } from "./rocketProperties.js";
 
-// console.log("oh hey there");
-// console.log(
-//   "also this aint optimized \nso expect a stroke when \ngoing through this"
-// );
-// console.log(
-//   "also while youre here feel free to add chances to each properties\nthe chances are the values and the output are the keys\ncheck the rocketProperties.js for that"
-// );
+const properties = {
+  centertankwidth: 0,
+  height: 0,
+  boosters: 0,
+  target: 0,
+  payload: 0,
+  stages: 0,
+  middleengines: 0,
+  lowerengines: 0,
+  upperengines: 0,
+};
+// values to be displayed
 
-let currentKey;
-let chosenValue;
-let enabledOptions = {
-  centertankwidth: true,
-  height: true,
-  boosters: true,
-  target: true,
-  payload: false,
-  stages: false,
-  middleengines: false,
-  lowerengines: false,
-  upperengines: false,
+const propertiesGeneral = {
+  centertankwidth: {
+    1.0: 0.3,
+    2.5: 0.6,
+    3.0: 0.8,
+    4.0: 0.6,
+    5.0: 0.5,
+    9.0: 0.4,
+    8.0: 0.3,
+  },
+  height: {
+    15.0: 0.15,
+    30.0: 0.3,
+    40.0: 0.5,
+    50.0: 0.6,
+    60.0: 0.7,
+    70.0: 0.3,
+    85.0: 0.7,
+    95.0: 0.4,
+    105.0: 0.4,
+    115.0: 0.4,
+  },
+  boosters: {
+    0: 0.6,
+    2: 0.7,
+    3: 0.5,
+    4: 0.5,
+    5: 0.3,
+    6: 0.2,
+    8: 0.1,
+  },
+  target: {
+    "Low Droo Orbit": 0.5,
+    "High Droo orbit": 0.7,
+    "Droo Geosynchronous Orbit": 0.5,
+    "Cylero Orbit": 0.2,
+    "Cylero Landing": 0.3,
+    "Cylero Land and return": 0.4,
+    "Cylero Flyby": 0.2,
+    "Sergeaa Flyby": 0.1,
+    "Sergeaa Orbit": 0.3,
+    "Sergeaa Landing": 0.1,
+    "Sergeaa Land and return": 0.03,
+    "Vulco Flyby": 0.1,
+    "Vulco Orbit": 0.2,
+    "Vulco Landing": 0.1,
+    "Vulco Land and return": 0.1,
+    "Tydos Flyby": 0.2,
+    "Tydos Orbit": 0.2,
+    "Urados Flyby": 0.5,
+    "Urados Orbit": 0.1,
+    "Luna Flyby": 0.7,
+    "Luna Orbit": 0.5,
+    "Luna Landing": 0.7,
+    "Luna Land and return": 0.5,
+    "Brigo Flyby": 0.9,
+    "Brigo Orbit": 0.8,
+    "Brigo Landing": 0.5,
+    "Brigo Land and return": 0.3,
+    "T.T. Flyby": 0.3,
+    "T.T. Orbit": 0.2,
+    "T.T. Landing": 0.2,
+    "T.T. Land and return": 0.2,
+    "Herma Flyby": 0.1,
+    "Herma Orbit": 0.1,
+    "Herma Landing": 0.1,
+    "Herma Land and return": 0.1,
+    "Niobe Flyby": 0.2,
+    "Niobe Orbit": 0.1,
+    "Niobe Landing": 0.1,
+    "Niobe Land and return": 0.1,
+    "Nebra Flyby": 0.3,
+    "Nebra Orbit": 0.2,
+    "Nebra Landing": 0.2,
+    "Nebra Land and return": 0.1,
+    "Orcus Flyby": 0.2,
+    "Orcus Orbit": 0.1,
+    "Orcus Landing": 0.1,
+    "Orcus Land and return": 0.1,
+    "Miros Flyby": 0.2,
+    "Miros Orbit": 0.1,
+    "Miros Landing": 0.1,
+    "Miros Land and return": 0.1,
+    "Jastrus Flyby": 0.1,
+    "Jastrus Orbit": 0.1,
+    "Jastrus Landing": 0.1,
+    "Jastrus Land and return": 0.1,
+    "Boreas Flyby": 0.2,
+    "Boreas Orbit": 0.1,
+    "Boreas Landing": 0.1,
+    "Boreas Land and return": 0.1,
+    "Taurus Flyby": 0.6,
+    "Taurus Orbit": 0.3,
+    "Taurus Landing": 0.6,
+    "Taurus Land and return": 0.3,
+    "Hypatchion Flyby": 0.1,
+    "Hypatchion Orbit": 0.1,
+    "Hypatchion Landing": 0.1,
+    "Hypatchion Land and return": 0.1,
+  },
+  payload: {
+    "<1k": 1,
+    "2-5k": 1,
+    "5-10k": 1,
+    "10-20k": 1,
+    "20-35k": 1,
+    "35-50k": 1,
+    "50-75k": 1,
+    "75-100k": 1,
+    "100-150k": 1,
+    "150-200k": 1,
+    "200-250k": 1,
+    "250-300k": 1,
+    "300-350k": 1,
+    "350-400k": 1,
+    "400-450k": 1,
+    "450-500k": 1,
+    "500-550k": 1,
+    "550-600k": 1,
+    "600-650k": 1,
+    "650-700k": 1,
+  },
+  stages: {
+    2: 0.6,
+    3: 0.5,
+    4: 0.6,
+    5: 0.3,
+    6: 0.2,
+    7: 0.1,
+    8: 0.1,
+  },
+  middleengines: {
+    1: 0.3,
+    2: 0.5,
+    3: 0.7,
+    4: 0.8,
+    5: 0.3,
+  },
+  lowerengines: {
+    1: 0.3,
+    2: 0.5,
+    3: 0.7,
+    4: 0.8,
+    5: 0.3,
+    6: 0.2,
+    7: 0.2,
+    8: 0.1,
+  },
+  upperengines: {
+    1: 0.3,
+    2: 0.5,
+    3: 0.7,
+    4: 0.8,
+    5: 0.3,
+  },
+};
+// values to choose from
+
+const presets = {
+  atlasV: {
+    centertankwidth: 3.8,
+    height: 58,
+    boosters: 3,
+    target: "",
+    payload: "8-18k",
+    stages: "",
+    middleengines: "",
+    lowerengines: "",
+    upperengines: "",
+  },
+  electron: {
+    centertankwidth: 1.2,
+    height: 18,
+    boosters: 0,
+    target: "",
+    payload: "0.3k",
+    stages: 3,
+    middleengines: "",
+    lowerengines: "",
+    upperengines: "",
+  },
+  titanIIIA: {
+    centertankwidth: 3,
+    height: 42,
+    boosters: 0,
+    target: "",
+    payload: "3.1k",
+    stages: 3,
+    middleengines: "",
+    lowerengines: "",
+    upperengines: "",
+  },
+  saturnV: {
+    centertankwidth: 10,
+    height: 110,
+    boosters: 0,
+    target: "",
+    payload: "140k",
+    stages: 3,
+    middleengines: "",
+    lowerengines: "",
+    upperengines: "",
+  },
+  slsblock1: {
+    centertankwidth: 8.4,
+    height: 98,
+    boosters: 2,
+    target: "",
+    payload: "95k",
+    stages: 2,
+    middleengines: "",
+    lowerengines: "",
+    upperengines: "",
+  },
+  slsblock2: {
+    centertankwidth: 8.4,
+    height: 111,
+    boosters: 2,
+    target: "",
+    payload: "130k",
+    stages: 2,
+    middleengines: "",
+    lowerengines: "",
+    upperengines: "",
+  },
+  arianeV: {
+    centertankwidth: 5.4,
+    height: 52,
+    boosters: 2,
+    target: "",
+    payload: "16-20k",
+    stages: 2,
+    middleengines: "",
+    lowerengines: "",
+    upperengines: "",
+  },
+  falcon9: {
+    centertankwidth: 3.7,
+    height: 70,
+    boosters: 0,
+    target: "",
+    payload: "22k",
+    stages: 2,
+    middleengines: "",
+    lowerengines: "",
+    upperengines: "",
+  },
+  soyuz2: {
+    centertankwidth: 2.95,
+    height: 46,
+    boosters: 4,
+    target: "",
+    payload: "8.2k",
+    stages: 3,
+    middleengines: "",
+    lowerengines: "",
+    upperengines: "",
+  },
+  n1: {
+    centertankwidth: 17,
+    height: 105,
+    boosters: 0,
+    target: "",
+    payload: "95k",
+    stages: 5,
+    middleengines: "",
+    lowerengines: "",
+    upperengines: "",
+  },
 };
 
-let currentPreset;
-let curPresetValArr;
-let curPresetKeyArr;
+// atlas v : 58m height 3 boosters 3.8m centertankwidth 8 - 18k payload 2 stages
+// electron : 18m height 1.2 centertankwidth 0 boosters 0.3k payload 3 stages
+// titan IIIA 42m height 3m centertankwidth 0 boosters 3.1k payload 3 stages
+// saturn v: 110m height 10m centertankwidth 3 stages 43k to tli 0 boosters
+// sls block 1: 98m height 8.4m centertankwidth 2 stages 95k leo payload 2 boosters
+// sls block 2 cargo: 111m 8.4m centertankwidth 2 stages 130k leo payload 2 boosters
+// ariane 5: 52m height 5.4m centertankwidth 2 stages 16-20k payload 2 boosters
+// falcon 9: 70m height 3.7 centertankwidth 2 stages 22k payload 0 boosters
+// soyuz 2: 46m height 2.95 centertankwidth 3 stages 8.2k payload 4 boosters
 
-// loading presets
-const loadPreset = function (name) {
-  currentPreset = presets[name];
-  curPresetValArr = [];
-  curPresetKeyArr = [];
-  Object.keys(currentPreset).forEach(function (element) {
-    curPresetKeyArr.push(element);
-  });
-  Object.values(currentPreset).forEach(function (element) {
-    curPresetValArr.push(element);
-  });
-  curPresetValArr.forEach(function (element, idx) {
-    if (element.toString().length > 0) {
-      properties[curPresetKeyArr[idx]] = curPresetValArr[idx];
-    }
-  });
-  updateText();
-};
+// n1: 105m height 17 centertankwidth 5 stages 95k payload 0 boosters
 
-const randomValue = function (min, max) {
-  return Math.random() * (max - min + 1) + min;
-};
-
-const updateText = function () {
-  htmlElements.height.textContent = properties.height + "m tall rocket";
-  htmlElements.centertankwidth.textContent =
-    properties.centertankwidth + "m Center Tank width";
-  htmlElements.boosters.textContent = properties.boosters + " Boosters";
-  htmlElements.payload.textContent = properties.payload + " kg payload mass";
-  htmlElements.target.textContent = "Target: " + properties.target;
-  htmlElements.stages.textContent = properties.stages + " Stages";
-  htmlElements.upperengines.textContent =
-    properties.upperengines + " Upper Engines";
-  htmlElements.middleengines.textContent =
-    properties.middleengines + " Middle Engines";
-  htmlElements.lowerengines.textContent =
-    properties.lowerengines + " Lower Engines";
-};
-
-let picked;
-let chance;
-let endValue;
-
-const generateProperties = function () {
-  for (let i = 0; i < Object.keys(properties).length; i++) {
-    currentKey = Object.keys(properties)[i];
-    picked = Object.keys(propertiesGeneral[currentKey]);
-
-    chance = propertiesGeneral[currentKey][picked[0]];
-
-    endValue = picked[Math.trunc(randomValue(0, picked.length - 1))];
-
-    properties[currentKey] = endValue;
-  }
-  updateText();
-};
-
-generateProperties();
-
-const updateProperties = function () {
-  enabledOptions.height
-    ? htmlElements.height.classList.remove("hidden")
-    : htmlElements.height.classList.add("hidden");
-
-  enabledOptions.centertankwidth
-    ? htmlElements.centertankwidth.classList.remove("hidden")
-    : htmlElements.centertankwidth.classList.add("hidden");
-
-  enabledOptions.boosters
-    ? htmlElements.boosters.classList.remove("hidden")
-    : htmlElements.boosters.classList.add("hidden");
-
-  enabledOptions.target
-    ? htmlElements.target.classList.remove("hidden")
-    : htmlElements.target.classList.add("hidden");
-
-  enabledOptions.payload
-    ? htmlElements.payload.classList.remove("hidden")
-    : htmlElements.payload.classList.add("hidden");
-
-  enabledOptions.stages
-    ? htmlElements.stages.classList.remove("hidden")
-    : htmlElements.stages.classList.add("hidden");
-
-  enabledOptions.lowerengines
-    ? htmlElements.lowerengines.classList.remove("hidden")
-    : htmlElements.lowerengines.classList.add("hidden");
-
-  enabledOptions.upperengines
-    ? htmlElements.upperengines.classList.remove("hidden")
-    : htmlElements.upperengines.classList.add("hidden");
-
-  enabledOptions.middleengines
-    ? htmlElements.middleengines.classList.remove("hidden")
-    : htmlElements.middleengines.classList.add("hidden");
-};
-
-let currentCheckbox;
-
-updateProperties();
-document.addEventListener("click", updateProperties);
-document.querySelectorAll(".btn").forEach(function (element) {
-  element.addEventListener("click", function (e) {
-    setTimeout(() => {
-      currentCheckbox = e.target.classList[0];
-      currentCheckbox = currentCheckbox.slice(
-        0,
-        currentCheckbox.lastIndexOf("btn")
-      );
-
-      enabledOptions[currentCheckbox]
-        ? (enabledOptions[currentCheckbox] = false)
-        : (enabledOptions[currentCheckbox] = true);
-      updateProperties();
-    }, 10);
-  });
-});
-
-htmlElements.randomize.addEventListener("click", function () {
-  generateProperties();
-});
-
-let picked2;
-let chosenValue2;
-
-htmlElements.proptext.forEach((element) => {
-  element.addEventListener("click", function (e) {
-    picked2 = Object.keys(propertiesGeneral[element.classList[0]]);
-
-    properties[element.classList[0]] =
-      picked2[Math.trunc(randomValue(0, picked2.length - 1))];
-
-    updateText();
-  });
-});
-
-htmlElements.preset.forEach(function (element) {
-  element.addEventListener("click", function () {
-    loadPreset(element.getAttribute("preset"));
-  });
-});
+export { properties, propertiesGeneral, presets };
