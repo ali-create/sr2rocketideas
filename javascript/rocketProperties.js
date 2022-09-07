@@ -186,7 +186,7 @@ const presets = {
   electron: {
     centertankwidth: 1.2,
     height: 18,
-    boosters: "",
+    boosters: 0,
     target: "",
     payload: "0.3k",
     stages: 3,
@@ -197,7 +197,7 @@ const presets = {
   titanIIIA: {
     centertankwidth: 3,
     height: 42,
-    boosters: "",
+    boosters: 0,
     target: "",
     payload: "3.1k",
     stages: 3,
@@ -208,7 +208,7 @@ const presets = {
   saturnV: {
     centertankwidth: 10,
     height: 110,
-    boosters: "",
+    boosters: 0,
     target: "",
     payload: "140k",
     stages: 3,
