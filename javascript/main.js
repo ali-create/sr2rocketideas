@@ -2,13 +2,13 @@
 import { htmlElements } from "./elements.js";
 import { properties, propertiesGeneral, presets } from "./rocketProperties.js";
 
-console.log("oh hey there");
-console.log(
-  "also this aint optimized \nso expect a stroke when \ngoing through this"
-);
-console.log(
-  "also while youre here feel free to add chances to each properties\nthe chances are the values and the output are the keys\ncheck the rocketProperties.js for that"
-);
+// console.log("oh hey there");
+// console.log(
+//   "also this aint optimized \nso expect a stroke when \ngoing through this"
+// );
+// console.log(
+//   "also while youre here feel free to add chances to each properties\nthe chances are the values and the output are the keys\ncheck the rocketProperties.js for that"
+// );
 
 let currentKey;
 let chosenValue;
@@ -40,7 +40,7 @@ const loadPreset = function (name) {
     curPresetValArr.push(element);
   });
   curPresetValArr.forEach(function (element, idx) {
-    if (element != "") {
+    if (element.toString().length > 0) {
       properties[curPresetKeyArr[idx]] = curPresetValArr[idx];
     }
   });
